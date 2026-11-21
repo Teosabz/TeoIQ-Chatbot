@@ -19,6 +19,7 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "icon", href: "/favicon.svg?v=teoiq-2026", type: "image/svg+xml" }],
   }),
   component: Landing,
 });
