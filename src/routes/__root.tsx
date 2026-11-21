@@ -133,6 +133,14 @@ function RootComponent() {
 
   // Single global auth subscriber: keeps router/cache in sync with the session.
   useEffect(() => {
+    const hasSupabaseConfig =
+      Boolean(import.meta.env["VITE_SUPABASE_URL"] || process.env["SUPABASE_URL"]) &&
+      Boolean(
+        import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"] ||
+          process.env["SUPABASE_PUBLISHABLE_KEY"],
+      );
+    if (!hasSupabaseConfig) return;
+
     const { data: sub } = supabase.auth.onAuthStateChange((event) => {
       if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
       router.invalidate();
